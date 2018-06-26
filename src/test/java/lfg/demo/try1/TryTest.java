@@ -38,7 +38,8 @@ public class TryTest {
 	 * try-catch-with-resource语句的用法。<br />
 	 * catch语句中捕捉的异常包括try代码块中的代码，也包括资源关闭语句抛出的异常。<br />
 	 * 同时有多个异常时，优先级最高的异常将被catch块捕捉，其它异常以suppressed的形式记录在此异常中。<br />
-	 * 优先级顺序为：逻辑代码 > 后声明的资源关闭时异常 > 先声明的资源关闭时异常。
+	 * 优先级顺序为：逻辑代码 > 后声明的资源关闭时异常 > 先声明的资源关闭时异常。< br /
+	 * 资源关闭的顺序为：resources中后声明的资源 > resources中先声明的资源 > finally块中的语句
 	 * 
 	 */
 	@Test
@@ -49,7 +50,7 @@ public class TryTest {
 			sb.append("try-");
 			in1.throw1();
 		} catch (Exception e) {
-			sb.append("catche-");
+			sb.append("catch-");
 			e.printStackTrace();
 			Throwable[] suppressed = e.getSuppressed();
 			String speratorLine = "------------------------------------";
@@ -59,6 +60,7 @@ public class TryTest {
 				System.err.println(speratorLine);
 			}
 		} finally {
+			System.out.println("finally block");
 			sb.append("finally-");
 		}
 		sb.append("end");
@@ -108,7 +110,9 @@ public class TryTest {
 		
 		@Override
 		public void close() throws IOException {
-			throw new RuntimeException("close：" + this.toString());
+			String message = "close：" + this.toString();
+			System.out.println(message);
+			throw new RuntimeException(message);
 		}
 
 		public String getName() {
