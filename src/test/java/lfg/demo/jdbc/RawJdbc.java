@@ -58,7 +58,7 @@ public class RawJdbc {
 	/**
 	 * 插入操作，包括blob等类型。
 	 * @param student
-	 * @return
+	 * @return 插入的行数
 	 */
 	public static int insert(Student student) {
 		int i = 0;
@@ -88,6 +88,12 @@ public class RawJdbc {
 		return i;
 	}
 
+	/**
+	 * 更新
+	 * 
+	 * @param student
+	 * @return 更新的行数
+	 */
 	public static int update(Student student) {
 		int i = 0;
 		String sql = "update student set Age='" + student.getAge() + "' where Name='" + student.getName() + "'";
@@ -145,6 +151,12 @@ public class RawJdbc {
 		return count;
 	}
 
+	/**
+	 * 删除
+	 * 
+	 * @param name
+	 * @return 删除的行数
+	 */
 	public static int delete(String name) {
 		Connection conn = null;
 		int i = 0;
