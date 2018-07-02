@@ -13,10 +13,12 @@ public class Closer {
 	 * @param closable
 	 */
 	public static final void closeQuietly(AutoCloseable closable) {
-		try {
-			closable.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (closable != null) {
+			try {
+				closable.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
