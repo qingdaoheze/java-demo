@@ -50,12 +50,12 @@ public class BioClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			Closer.closeQuietly(userReader);
-			Closer.closeQuietly(requestWriter);
-			Closer.closeQuietly(outputStream);
-			Closer.closeQuietly(replyReader);
-			Closer.closeQuietly(inputStream);
-			Closer.closeQuietly(socket);
+			Closer.closeSilently(userReader);
+			Closer.closeSilently(requestWriter);
+			Closer.closeSilently(outputStream);
+			Closer.closeSilently(replyReader);
+			Closer.closeSilently(inputStream);
+			Closer.closeSilently(socket);
 		}
 	}
 }

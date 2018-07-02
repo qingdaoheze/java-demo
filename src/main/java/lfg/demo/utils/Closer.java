@@ -8,17 +8,31 @@ package lfg.demo.utils;
  */
 public class Closer {
 	/**
-	 * 静默调用java.lang.AutoCloseable接口的close方法。
 	 * 
-	 * @param closable
+	 * 关闭一个AutoCloseable对象。如果关闭成功，且无异常，则返回true。否则返回false。
+	 * 
+	 * @param closeable
+	 * @return	如果对象被成功关闭，则返回true；否则，返回false。
 	 */
-	public static final void closeQuietly(AutoCloseable closable) {
-		if (closable != null) {
-			try {
-				closable.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	public static final boolean closeSilently(AutoCloseable closeable) {
+		try {
+			close(closeable);
+			return true;
+		} catch (final Exception ignored) {
+			return false;
 		}
 	}
+
+	/**
+	 * 关闭AutoCloseable接口对象，如果此对象为null，则忽略。
+	 * 
+	 * @param closeable
+	 * @throws Exception
+	 */
+	public static void close(final AutoCloseable closeable) throws Exception {
+		if (closeable != null) {
+			closeable.close();
+		}
+	}
+
 }

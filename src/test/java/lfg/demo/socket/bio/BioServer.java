@@ -50,12 +50,12 @@ public class BioServer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			Closer.closeQuietly(writer);
-			Closer.closeQuietly(outputStream);
-			Closer.closeQuietly(reader);
-			Closer.closeQuietly(inputStream);
-			Closer.closeQuietly(socket);
-			Closer.closeQuietly(server);
+			Closer.closeSilently(writer);
+			Closer.closeSilently(outputStream);
+			Closer.closeSilently(reader);
+			Closer.closeSilently(inputStream);
+			Closer.closeSilently(socket);
+			Closer.closeSilently(server);
 		}
 		
 	}
